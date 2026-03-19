@@ -22,11 +22,10 @@ def webhook():
 
     #ーーーーーーーーーーーーーーーーーーーーーーーーーーーメインコードーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     cw = chatwork.setup(room_id, API_TOKEN)
-    def startcomment():
+
+    while True:
         cw.messagesend("a")
         time.sleep(0.7)
-    while True:
-        startcomment()
         return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
