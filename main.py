@@ -26,12 +26,7 @@ def webhook():
         cw.messagesend("a")
         time.sleep(0.7)
     while True:
-        if body == "/start":
-            cw.messagesend("botを開始します")
-            startcomment()
-        elif body == "/stop":
-            cw.messagesend("botを停止します")
-            break
+        startcomment()
     return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
