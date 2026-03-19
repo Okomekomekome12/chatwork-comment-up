@@ -1,13 +1,27 @@
 import os
 import time
+import threading # 追加
 import chatwork
 from flask import Flask, request, jsonify
+
 app = Flask(__name__)
 API_TOKEN = "d417c4819ad4b18a4a2c6bdbd84bb365"
 SECRET_TOKEN = None
+
+def continuous_send(room_id):
+    cw = chatwork.setup(room_id, API_TOKEN)
+    while True:
+        try:
+            cw.messagesend("a")
+            time.sleep(0.7)
+        except Exception as e:
+            print(f"Error: {e}")
+            break
+
 @app.route("/", methods=["GET"])
 def health():
     return "OK"
+
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -22,12 +36,15 @@ def webhook():
 
     #ーーーーーーーーーーーーーーーーーーーーーーーーーーーメインコードーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     cw = chatwork.setup(room_id, API_TOKEN)
+    thread = threading.Thread(target=continuous_send, args=(room_id))
+    thread.daemon = True 
+    thread.start()
 
-    while True:
-        cw.messagesend("a")
-        time.sleep(0.7)
-        return jsonify({"status": "ok"}), 200
+    return jsonify({"status": "accepted"}), 200
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
