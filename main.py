@@ -27,7 +27,7 @@ def webhook():
         time.sleep(0.7)
     while True:
         startcomment()
-    return jsonify({"status": "ok"}), 200
+        return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
