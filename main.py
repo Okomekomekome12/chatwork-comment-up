@@ -10,7 +10,7 @@ app = Flask(__name__)
 API_TOKEN = "ca8a3ef60488030d8e0f9485ec6db3e6"
 # ChatworkのWebhook設定画面にある「署名」を入力してください。
 # なければ None のままで検証をスキップするように調整します。
-SECRET_TOKEN = "mX3yNOKb7kyQnPGOlaQMVcl9+gwVQD9PdqDz9dJ/s8M=" 
+SECRET_TOKEN = "uBHVYDNYAqV3zv9PxNtGnnAzHUbPZfWrf13cJGjEAD8=" 
 
 def continuous_send(room_id):
     # クラスをインスタンス化
