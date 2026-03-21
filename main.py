@@ -13,4 +13,4 @@ cw2 = chatwork.setup(426121900,SECOND_API_TOKEN)
 while True:
     cw2.messagesend("a")
     cw.messagesend("a")
-    time.sleep(1)
+    time.sleep(1.2)
