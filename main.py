@@ -4,10 +4,10 @@ import threading
 import chatwork
 from flask import Flask, request, jsonify
 
-"""app = Flask(__name__)
+app = Flask(__name__)
 
 # --- 設定 ---
-API_TOKEN = "d417c4819ad4b18a4a2c6bdbd84bb365"
+API_TOKEN = "ca8a3ef60488030d8e0f9485ec6db3e6"
 # ChatworkのWebhook設定画面にある「署名」を入力してください。
 # なければ None のままで検証をスキップするように調整します。
 SECRET_TOKEN = "mX3yNOKb7kyQnPGOlaQMVcl9+gwVQD9PdqDz9dJ/s8M=" 
@@ -52,4 +52,4 @@ def webhook():
 if __name__ == "__main__":
     # Railwayなどの環境では環境変数PORTが自動付与されます
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)"""
+    app.run(host="0.0.0.0", port=port)
