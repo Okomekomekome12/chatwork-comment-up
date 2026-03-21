@@ -18,8 +18,8 @@ def continuous_send(room_id):
         except:
             time.sleep(60)
             continue
-        # 5分300回 = 1秒1回が理論上限
-        time.sleep(1)
+        # 部屋単位の制限は全体より厳しい（約100回/5分）
+        time.sleep(3)
 
 
 @app.route("/", methods=["GET"])
@@ -30,15 +30,15 @@ def health():
 @app.route("/webhook", methods=["POST"])
 def webhook():
     sig = request.headers.get("X-ChatWorkWebhookSignature")
-    if not chatwork.webhook_verify_signature(request.data, sig, SECRET_TOKEN): # type: ignore
+    if not chatwork.webhook_verify_signature(request.data, sig, SECRET_TOKEN):
         return "", 403
 
     room_id = chatwork.webhook_get_roomid(request.json)
     if not room_id:
-        return "no room id", 400
+        return "", 400
 
     threading.Thread(target=continuous_send, args=(str(room_id),), daemon=True).start()
-    return "ok", 200
+    return "", 200
 
 
 if __name__ == "__main__":
