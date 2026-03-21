@@ -20,7 +20,7 @@ def continuous_send(room_id):
         try:
             cw.messagesend("a")
             # API制限(5分で300回)を考慮し、少し余裕を持たせるのが安全です
-            time.sleep(1) 
+            time.sleep(1.2) 
         except Exception as e:
             print(f"Loop Error: {e}")
             break
